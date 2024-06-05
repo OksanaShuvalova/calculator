@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <link rel="stylesheet" href="styles/main.css">
+</head>
+
+<body>
+    <div class="container">
+        <!-- контейнер калькулятора -->
+        <fieldset id="container">
+            <!-- форма калькулятора -->
+            <form name="calculator">
+
+                <textarea class="display" type="text" name="display" readonly></textarea>
+
+                <br />
+                <div class="wrapper">
+                    <!-- кнопки пам'ятi  -->
+                    <input class="button" type="button" value="MS">
+                    <input class="button" type="button" value="MR">
+                    <input class="button" type="button" value="MC">
+                    <input class="button" type="button" value="M">
+
+                </div>
+                <div class="wrapper">
+                    <input id="num7" class="button" type="button" value="7">
+                    <input id="num8" class="button" type="button" value="8">
+                    <input id="num9" class="button" type="button" value="9">
+                    <input id="add" class="button mathButtons" type="button" value="+">
+
+                </div>
+
+                <div class="wrapper">
+                    <input id="num4" class="button" type="button" value="4">
+                    <input id="num5" class="button" type="button" value="5">
+                    <input id="num6" class="button" type="button" value="6">
+                    <input id="subtr" class="button" type="button" value="-">
+
+                </div>
+
+                <div class="wrapper">
+                    <input id="num1" class="button" type="button" value="1">
+                    <input id="num2" class="button" type="button" value="2">
+                    <input id="num3" class="button" type="button" value="3">
+                    <input id="mul" class="button" type="button" value="*">
+
+                </div>
+                <div class="wrapper">
+                    <input id="clearButton" class="button" type="button" value="C">
+                    <input id="num0" class="button" type="button" value="0">
+                    <input id="res" class="button mathButtons" type="button" value="=">
+                    <input id="div" class="button mathButtons" type="button" value="/">
+                </div>
+            </form>
+        </fieldset>
+    </div>
+
+
+    <script>
+        let prev_operand = "";
+        let cur_operand = "";
+        let result = 0;
+        let sign = "";
+
+        let num_objects = [];
+
+        function createNumObjects() {
+            for (let i = 0; i < 10; i++) {
+                var obj = {};
+                let name_attr = "#num" + String(i);
+                let key = "num" + String(i);
+                let value = document.querySelector(name_attr);
+                obj[key] = value;
+
+                value.addEventListener("click", function () {
+                    let display = document.querySelector(".display");
+                    cur_operand += value.defaultValue;
+
+                    if (sign.length > 0) {
+                        switch (sign) {
+                            case '+':
+                                let array_of_str = [];
+                                result = Number(prev_operand) + Number(cur_operand);
+                                array_of_str[0] = "=" + result + "\n";
+                                array_of_str[1] = cur_operand;
+                                display.classList.add("new_display");
+                                display.value = array_of_str[0] + array_of_str[1];
+                                break;
+                            case '-':
+                                result = Number(prev_operand) - Number(cur_operand);
+                                display.classList.add("new_display");
+                                display.value = result + "\n" + cur_operand;
+                                break;
+                            case '*':
+                                result = Number(prev_operand) * Number(cur_operand);
+                                display.classList.add("new_display");
+                                display.value = result + "\n" + cur_operand;
+                                break;
+                            case '/':
+                                result = Number(prev_operand) / Number(cur_operand);
+                                display.classList.add("new_display");
+                                display.value = result + "\n" + cur_operand;
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                    else {
+                        result = Number(cur_operand);
+                        display.value = result;
+                    }
+
+                });
+                num_objects.push(obj);
+            }
+        }
+
+        let sign_objects = [];
+        function createSignObjects() {
+            let addBtn = document.querySelector("#add");
+            sign_objects.push(addBtn);
+            let subtrBtn = document.querySelector("#subtr");
+            sign_objects.push(subtrBtn);
+            let mulBtn = document.querySelector("#mul");
+            sign_objects.push(mulBtn);
+            let divBtn = document.querySelector("#div");
+            sign_objects.push(divBtn);
+
+            for (let i = 0; i < sign_objects.length; i++) {
+                const element = sign_objects[i];
+                element.addEventListener("click", function () {
+                    let display = document.querySelector(".display");
+                    sign = element.defaultValue;
+                    cur_operand = "";
+                    prev_operand = result;
+                    display.value = result + "\n" + sign;
+                });
+            }
+        }
+
+        let resBtn = document.querySelector("#res");
+        resBtn.addEventListener("click", function () {
+            let display = document.querySelector(".display");
+            display.classList.remove("new_display");
+            display.value = result;
+        });
+
+        let clearBtn = document.querySelector("#clearButton");
+        clearBtn.addEventListener("click", function () {
+
+            let display = document.querySelector(".display");
+            display.classList.remove("new_display");
+            prev_operand = "";
+            cur_operand = "";
+            result = 0;
+            sign = "";
+            display.value = "";
+        });
+
+        createNumObjects();
+        createSignObjects();
+
+    </script>
+</body>
+
+</html>

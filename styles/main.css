@@ -1,0 +1,91 @@
+body {
+    margin: 0;
+}
+
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+
+}
+
+#container {
+    width: 300px;
+   
+  }
+
+.wrapper {
+    display: flex;
+    justify-content: space-between;
+    padding: 1px;
+}
+
+.display {
+    
+    display: flex;
+    box-sizing: border-box;
+    scrollbar-width: 0px;
+    overflow: hidden;
+    resize: none;
+
+    /* відступи зверху і знизу и горизонтальне вирівн по центру */
+    margin: 10px auto;
+    height: 40px;
+    width: 100%;   
+    padding: 0 10px;
+  /* тіні подумати */
+
+    border-radius: 5px;
+    /* верхня рамка */
+    border-top: 2px solid #211c1c;
+    /* рамка праворуч */
+    border-right: 2px solid #211c1c;
+    /* нижнея рамка */
+    border-bottom: 2px solid #040303;
+    /* рамка ліворуч */
+    border-left: 2px solid #040303;
+   
+    background-color: #a5b1ac;
+     
+    font-size: 30px;  
+    color: #000000;
+    text-align: right;
+    font-weight: bold;
+  
+  }
+
+  .new_display {   
+    height: 70px;   
+  }
+ 
+
+.button {    
+    display: flex; 
+    margin: 2px;  
+    width: 25%;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 5px;
+  }
+
+  #num0:hover,
+  #num1:hover,
+  #num2:hover,
+  #num3:hover,
+  #num4:hover,
+  #num5:hover,
+  #num6:hover,
+  #num7:hover,
+  #num8:hover,
+  #num9:hover,
+  #add:hover,
+  #subtr:hover,
+  #mul:hover,
+  #div:hover,
+  #res:hover,
+  #clearButton:hover
+    {
+    background-color: #e2e9e6;
+  }
+
